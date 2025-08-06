@@ -1,5 +1,5 @@
 import { client } from "@/sanity/client";
-import Link from "next/link";
+import HealthTipCard from "@/components/HealthTipCard";
 
 const HEALTH_TIPS_QUERY = `*[
   _type == "healthTip"
@@ -12,16 +12,23 @@ export default async function HealthTips() {
   const healthTips = await client.fetch(HEALTH_TIPS_QUERY, {}, options);
 
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Health Tips</h1>
-      <ul className="flex flex-col gap-y-4">
-        {healthTips.map((healthTip) => (
-          <li className="hover:underline" key={healthTip._id}>
-            <Link href={`/health-tips/${healthTip.slug.current}`}>
-              <h4 className="text-sm font-semibold">{healthTip.category}</h4>
-              <h2 className="text-xl font-semibold">{healthTip.title}</h2>
-            </Link>
-          </li>
+    <main className="container mx-auto min-h-screen max-w-3xl px-4 py-10">
+      <header className="mb-8 text-center">
+        <h1 className="text-4xl font-extrabold text-gray-300">Health Tips</h1>
+        <p className="mt-2 text-sm text-gray-600">
+          Browse our latest health advice and wellness suggestions.
+        </p>
+      </header>
+
+      <ul className="space-y-4">
+        {healthTips.map((tip) => (
+          <HealthTipCard
+            key={tip._id}
+            id={tip._id}
+            title={tip.title}
+            slug={tip.slug.current}
+            category={tip.category}
+          />
         ))}
       </ul>
     </main>
