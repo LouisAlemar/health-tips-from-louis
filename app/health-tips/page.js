@@ -11,8 +11,6 @@ const options = { next: { revalidate: 30 } };
 export default async function HealthTips() {
   const healthTips = await client.fetch(HEALTH_TIPS_QUERY, {}, options);
 
-  console.log(healthTips);
-
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8">
       <h1 className="text-4xl font-bold mb-8 text-center">Health Tips</h1>

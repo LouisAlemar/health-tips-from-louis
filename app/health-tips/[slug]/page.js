@@ -9,8 +9,6 @@ const options = { next: { revalidate: 30 } };
 export default async function HealthTips({ params }) {
   const healthTip = await client.fetch(HEALTH_TIP_QUERY, await params, options);
 
-  console.log(healthTip);
-
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
       <Link href="/health-tips" className="hover:underline">
